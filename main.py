@@ -1,22 +1,25 @@
 import requests 
 from bs4 import BeautifulSoup
+from update_api import _to_ascii
 
 # div = item_name.get('div')
 
 # Tickets to be searched throughout the different online vendors
 # Defining the initial product
 def concert_tickets():
-	url = "https://www.stubhub.com/florida-georgia-line-tickets-florida-georgia-line-wantagh-northwell-health-at-jones-beach-theater-6-15-2017/event/9806266/?mbox=1&rS=6&abbyo=true&sliderpos=false&qtyq=false&qtyddab=true&sort=price+asc"
+	url = "https://www1.ticketmaster.com/chance-the-rapper-tampa-florida-06-14-2017/event/0D005246C6439730?artistid=1750234&majorcatid=10001&minorcatid=3&tm_link=artist_msg-0_0D005246C6439730"
 	source_code = requests.get(url)
 	plain_text = source_code.text
 	soup = BeautifulSoup(plain_text, "html.parser")
-	for price_info in soup.findAll('div', {'class': 'partials'}):
-		div = prince_info.get('div')
-		#dollar-value = price_info.string
-		partials = price_info.string
+	#try:
+	for price_info in soup.findAll('span'):
+		span = price_info.get('span')
 		#print(partials)
-		print(soup)
+		#print(span)
 		print(price_info)
+	#except UnicodeEncodeError:
+	#	pass
 # Call the function for testing
+#_to_ascii(u'\xa9')
 concert_tickets()
 
